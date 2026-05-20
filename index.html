@@ -17,6 +17,7 @@
             overflow: hidden;
         }
 
+        /* ── HEADER ───────────────────────────── */
         #header {
             background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
             color: white;
@@ -32,53 +33,96 @@
         #header-left { display: flex; flex-direction: column; }
         #header-right { font-size: 11px; opacity: 0.7; text-align: right; }
 
-        #map-container { flex: 1; position: relative; overflow: hidden; }
+        /* ── MAP ──────────────────────────────── */
+        #map-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
         #map-svg { width: 100%; height: 100%; display: block; }
-        .dept-path { stroke: #7a9ab8; stroke-width: 0.5px; }
 
+        .dept-path {
+            stroke: #7a9ab8;
+            stroke-width: 0.5px;
+        }
+
+        /* ── LEGEND ───────────────────────────── */
         #legend {
-            position: absolute; bottom: 14px; left: 14px;
+            position: absolute;
+            bottom: 14px;
+            left: 14px;
             background: rgba(255,255,255,0.93);
             border: 1px solid rgba(0,0,0,0.12);
-            border-radius: 10px; padding: 10px 14px;
+            border-radius: 10px;
+            padding: 10px 14px;
             box-shadow: 0 2px 14px rgba(0,0,0,0.13);
-            min-width: 160px; pointer-events: none;
+            min-width: 160px;
+            pointer-events: none;
         }
         #legend-title {
-            font-size: 9.5px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 0.08em;
-            color: #475569; margin-bottom: 8px;
+            font-size: 9.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #475569;
+            margin-bottom: 8px;
         }
         .leg-row {
-            display: flex; align-items: center;
-            gap: 8px; margin: 5px 0;
-            font-size: 12px; color: #1e293b; line-height: 1.35;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 5px 0;
+            font-size: 12px;
+            color: #1e293b;
+            line-height: 1.35;
         }
         .leg-dot {
-            width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            flex-shrink: 0;
             box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
         }
 
+        /* ── QR CODE ──────────────────────────── */
         #qr-box {
-            position: absolute; bottom: 14px; right: 14px;
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
             background: rgba(255,255,255,0.93);
             border: 1px solid rgba(0,0,0,0.12);
-            border-radius: 10px; padding: 10px;
+            border-radius: 10px;
+            padding: 10px;
             box-shadow: 0 2px 14px rgba(0,0,0,0.13);
-            display: flex; flex-direction: column;
-            align-items: center; gap: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
         #qr-canvas { width: 100px; height: 100px; }
-        #qr-label { font-size: 9px; color: #64748b; text-align: center; max-width: 100px; line-height: 1.3; }
-
-        #zoom-hint {
-            position: absolute; top: 10px; right: 10px;
-            background: rgba(255,255,255,0.82);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px; padding: 5px 10px;
-            font-size: 10px; color: #64748b; pointer-events: none;
+        #qr-label {
+            font-size: 9px;
+            color: #64748b;
+            text-align: center;
+            max-width: 100px;
+            line-height: 1.3;
         }
 
+        /* Zoom hint */
+        #zoom-hint {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 10px;
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        /* ── RESPONSIVE ───────────────────────── */
         @media (max-width: 600px) {
             #header h1 { font-size: 14px; }
             #header p  { font-size: 10px; }
@@ -93,71 +137,151 @@
 
 <div id="header">
     <div id="header-left">
-        <h1>Zones d'intervention &ndash; France</h1>
-        <p>Tarification par d&eacute;partement</p>
+        <h1>Zones d'intervention – France</h1>
+        <p>Tarification par département</p>
     </div>
     <div id="header-right">
-        Scannez le QR code<br>pour acc&eacute;der depuis<br>votre smartphone
+        Scannez le QR code<br>pour accéder depuis<br>votre smartphone
     </div>
 </div>
 
 <div id="map-container">
     <svg id="map-svg"></svg>
 
+    <!-- Legend -->
     <div id="legend">
-        <div id="legend-title">L&eacute;gende</div>
+        <div id="legend-title">Légende</div>
         <div class="leg-row">
             <div class="leg-dot" style="background:#22c55e"></div>
             Tarif BPU National
         </div>
         <div class="leg-row">
             <div class="leg-dot" style="background:#f97316"></div>
-            <span>Plus value chantier IDF<br>ou &eacute;loign&eacute;</span>
+            <span>Plus value chantier IDF<br>ou éloigné</span>
         </div>
     </div>
 
+    <!-- QR Code -->
     <div id="qr-box">
         <canvas id="qr-canvas"></canvas>
         <div id="qr-label">Scanner pour ouvrir sur mobile</div>
     </div>
 
-    <div id="zoom-hint">&#128241; Molette ou pincement pour zoomer</div>
+    <div id="zoom-hint">📱 Molette ou pincement pour zoomer</div>
 </div>
 
 <script>
+// ═══════════════════════════════════════════════
+// DEPARTMENT COLOR DATA  (from map screenshot)
+// ═══════════════════════════════════════════════
 const GREEN  = '#22c55e';
 const ORANGE = '#f97316';
 
 const DEPT_COLORS = {
-    '01': GREEN,  '04': GREEN,  '05': GREEN,  '06': GREEN,  '07': GREEN,
-    '10': GREEN,  '13': GREEN,  '14': GREEN,  '21': GREEN,  '22': GREEN,
-    '25': GREEN,  '26': GREEN,  '29': GREEN,  '30': GREEN,  '35': GREEN,
-    '38': GREEN,  '39': GREEN,  '42': GREEN,  '43': GREEN,  '44': GREEN,
-    '49': GREEN,  '50': GREEN,  '52': GREEN,  '53': GREEN,  '56': GREEN,
-    '68': GREEN,  '69': GREEN,  '70': GREEN,  '71': GREEN,  '73': GREEN,
-    '74': GREEN,  '83': GREEN,  '84': GREEN,  '88': GREEN,  '90': GREEN,
+    // ── Vert – Tarif BPU National ──────────────
+    '01': GREEN,  // Ain
+    '04': GREEN,  // Alpes-de-Haute-Provence
+    '05': GREEN,  // Hautes-Alpes
+    '06': GREEN,  // Alpes-Maritimes
+    '07': GREEN,  // Ardèche
+    '10': GREEN,  // Aube
+    '13': GREEN,  // Bouches-du-Rhône
+    '14': GREEN,  // Calvados
+    '21': GREEN,  // Côte-d'Or
+    '22': GREEN,  // Côtes-d'Armor
+    '25': GREEN,  // Doubs
+    '26': GREEN,  // Drôme
+    '29': GREEN,  // Finistère
+    '30': GREEN,  // Gard
+    '35': GREEN,  // Ille-et-Vilaine
+    '38': GREEN,  // Isère
+    '39': GREEN,  // Jura
+    '42': GREEN,  // Loire
+    '43': GREEN,  // Haute-Loire
+    '44': GREEN,  // Loire-Atlantique
+    '49': GREEN,  // Maine-et-Loire
+    '50': GREEN,  // Manche
+    '52': GREEN,  // Haute-Marne
+    '53': GREEN,  // Mayenne
+    '56': GREEN,  // Morbihan
+    '68': GREEN,  // Haut-Rhin
+    '69': GREEN,  // Rhône
+    '70': GREEN,  // Haute-Saône
+    '71': GREEN,  // Saône-et-Loire
+    '73': GREEN,  // Savoie
+    '74': GREEN,  // Haute-Savoie
+    '83': GREEN,  // Var
+    '84': GREEN,  // Vaucluse
+    '88': GREEN,  // Vosges
+    '90': GREEN,  // Territoire de Belfort
 
-    '02': ORANGE, '03': ORANGE, '08': ORANGE, '11': ORANGE, '12': ORANGE,
-    '15': ORANGE, '16': ORANGE, '17': ORANGE, '18': ORANGE, '19': ORANGE,
-    '23': ORANGE, '27': ORANGE, '28': ORANGE, '34': ORANGE, '36': ORANGE,
-    '37': ORANGE, '41': ORANGE, '45': ORANGE, '46': ORANGE, '48': ORANGE,
-    '51': ORANGE, '54': ORANGE, '55': ORANGE, '57': ORANGE, '58': ORANGE,
-    '59': ORANGE, '60': ORANGE, '61': ORANGE, '62': ORANGE, '63': ORANGE,
-    '66': ORANGE, '67': ORANGE, '72': ORANGE, '75': ORANGE, '76': ORANGE,
-    '77': ORANGE, '78': ORANGE, '79': ORANGE, '80': ORANGE, '81': ORANGE,
-    '82': ORANGE, '85': ORANGE, '86': ORANGE, '87': ORANGE, '89': ORANGE,
-    '91': ORANGE, '92': ORANGE, '93': ORANGE, '94': ORANGE, '95': ORANGE,
+    // ── Orange – Plus value chantier IDF ou éloigné ──
+    '02': ORANGE, // Aisne
+    '03': ORANGE, // Allier
+    '08': ORANGE, // Ardennes
+    '11': ORANGE, // Aude
+    '12': ORANGE, // Aveyron
+    '15': ORANGE, // Cantal
+    '16': ORANGE, // Charente
+    '17': ORANGE, // Charente-Maritime
+    '18': ORANGE, // Cher
+    '19': ORANGE, // Corrèze
+    '23': ORANGE, // Creuse
+    '27': ORANGE, // Eure
+    '28': ORANGE, // Eure-et-Loir
+    '34': ORANGE, // Hérault
+    '36': ORANGE, // Indre
+    '37': ORANGE, // Indre-et-Loire
+    '41': ORANGE, // Loir-et-Cher
+    '45': ORANGE, // Loiret
+    '46': ORANGE, // Lot
+    '48': ORANGE, // Lozère
+    '51': ORANGE, // Marne
+    '54': ORANGE, // Meurthe-et-Moselle
+    '55': ORANGE, // Meuse
+    '57': ORANGE, // Moselle
+    '58': ORANGE, // Nièvre
+    '59': ORANGE, // Nord
+    '60': ORANGE, // Oise
+    '61': ORANGE, // Orne
+    '62': ORANGE, // Pas-de-Calais
+    '63': ORANGE, // Puy-de-Dôme
+    '66': ORANGE, // Pyrénées-Orientales
+    '67': ORANGE, // Bas-Rhin
+    '72': ORANGE, // Sarthe
+    '75': ORANGE, // Paris
+    '76': ORANGE, // Seine-Maritime
+    '77': ORANGE, // Seine-et-Marne
+    '78': ORANGE, // Yvelines
+    '79': ORANGE, // Deux-Sèvres
+    '80': ORANGE, // Somme
+    '81': ORANGE, // Tarn
+    '82': ORANGE, // Tarn-et-Garonne
+    '85': ORANGE, // Vendée
+    '86': ORANGE, // Vienne
+    '87': ORANGE, // Haute-Vienne
+    '89': ORANGE, // Yonne
+    '91': ORANGE, // Essonne
+    '92': ORANGE, // Hauts-de-Seine
+    '93': ORANGE, // Seine-Saint-Denis
+    '94': ORANGE, // Val-de-Marne
+    '95': ORANGE, // Val-d'Oise
 };
 
 const OVERSEAS  = ['971','972','973','974','976'];
 const FILL_NONE = '#f0f5f9';
 
+// ═══════════════════════════════════════════════
+// QR CODE  (inline generation – no external lib)
+// ═══════════════════════════════════════════════
+// We use the free qrserver.com API via an image
+// and draw it on the canvas for a clean look.
 function generateQR() {
     const url = window.location.href;
-    const api = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(url) + '&bgcolor=ffffff&color=1e3a5f&margin=4&format=png';
+    const api = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}&bgcolor=ffffff&color=1e3a5f&margin=4&format=png`;
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload = function() {
+    img.onload = () => {
         const canvas = document.getElementById('qr-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = 200; canvas.height = 200;
@@ -166,8 +290,12 @@ function generateQR() {
     img.src = api;
 }
 
+// ═══════════════════════════════════════════════
+// MAP RENDERING
+// ═══════════════════════════════════════════════
 async function loadMap() {
-    const r   = await fetch('https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements.geojson');
+    const url = 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements.geojson';
+    const r   = await fetch(url);
     const geo = (await r.json()).features;
     renderMap(geo);
 }
@@ -181,8 +309,8 @@ function renderMap(geo) {
     const H = container.clientHeight;
     svgSel.attr('width', W).attr('height', H);
 
-    const metro   = geo.filter(function(f) { return !OVERSEAS.includes(f.properties.code); });
-    const outre   = geo.filter(function(f) { return  OVERSEAS.includes(f.properties.code); });
+    const metro   = geo.filter(f => !OVERSEAS.includes(f.properties.code));
+    const outre   = geo.filter(f =>  OVERSEAS.includes(f.properties.code));
     const metroGC = { type: 'FeatureCollection', features: metro };
 
     const overseasW = 90;
@@ -194,39 +322,48 @@ function renderMap(geo) {
         .fitExtent([[8, 8], [mapW, H - 8]], metroGC);
     const pathGen = d3.geoPath().projection(proj);
 
+    // Sea
     svgSel.append('rect').attr('width', W).attr('height', H).attr('fill', '#cfe3f3');
 
+    // Zoom + pan + pinch
     const zoomLayer = svgSel.append('g');
     const zoom = d3.zoom().scaleExtent([0.4, 20])
-        .on('zoom', function(e) { zoomLayer.attr('transform', e.transform); });
+        .on('zoom', e => zoomLayer.attr('transform', e.transform));
     svgSel.call(zoom);
 
-    metro.forEach(function(f) {
+    // Metro departments
+    metro.forEach(f => {
         const code = f.properties.code;
         const name = f.properties.nom;
         const c    = pathGen.centroid(f);
         const area = pathGen.area(f);
         const fill = DEPT_COLORS[code] || FILL_NONE;
 
-        zoomLayer.append('path').datum(f)
-            .attr('class', 'dept-path').attr('d', pathGen).attr('fill', fill);
+        zoomLayer.append('path')
+            .datum(f)
+            .attr('class', 'dept-path')
+            .attr('d', pathGen)
+            .attr('fill', fill);
 
         if (isNaN(c[0]) || isNaN(c[1]) || area < 90) return;
 
-        const fs    = Math.max(7, Math.min(13, Math.sqrt(area) / 3.8));
+        const fs    = clamp(Math.sqrt(area) / 3.8, 7, 13);
         const showN = area > 900;
         const textColor = fill === FILL_NONE ? '#374151' : '#fff';
-        const shadow    = fill === FILL_NONE ? '0 0 3px rgba(255,255,255,0.8)' : '0 0 3px rgba(0,0,0,0.35)';
+        const shadow    = fill === FILL_NONE
+            ? '0 0 3px rgba(255,255,255,0.8)'
+            : '0 0 3px rgba(0,0,0,0.35)';
 
         zoomLayer.append('text')
             .attr('x', c[0]).attr('y', showN ? c[1] - fs * 0.55 : c[1])
             .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
             .attr('font-size', fs + 'px').attr('font-weight', '800')
             .attr('fill', textColor).attr('pointer-events', 'none')
-            .style('text-shadow', shadow).text(code);
+            .style('text-shadow', shadow)
+            .text(code);
 
         if (showN) {
-            const nfs = Math.max(6, Math.min(10, fs * 0.72));
+            const nfs     = clamp(fs * 0.72, 6, 10);
             const display = area > 3000 ? name
                           : area > 1500 ? name.split(/[-\s]/)[0].substring(0, 14)
                           :               name.split(/[-\s]/)[0].substring(0, 10);
@@ -235,14 +372,16 @@ function renderMap(geo) {
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
                 .attr('font-size', nfs + 'px').attr('font-weight', '500')
                 .attr('fill', textColor).attr('pointer-events', 'none')
-                .style('text-shadow', shadow).text(display);
+                .style('text-shadow', shadow)
+                .text(display);
         }
     });
 
+    // Overseas insets (fixed, outside zoom)
     const insetH = Math.floor((H - 20) / outre.length) - 6;
     const insetX = mapW + 8;
 
-    outre.forEach(function(f, i) {
+    outre.forEach((f, i) => {
         const code = f.properties.code;
         const name = f.properties.nom;
         const y    = 10 + i * (insetH + 6);
@@ -264,10 +403,10 @@ function renderMap(geo) {
             .attr('x', insetX + (overseasW - 2) / 2).attr('y', y + 9)
             .attr('text-anchor', 'middle')
             .attr('font-size', '7.5px').attr('font-weight', '700').attr('fill', '#475569')
-            .text(code + ' - ' + name.substring(0, 12));
+            .text(code + ' · ' + name.substring(0, 12));
 
-        svgSel.append('path').datum(f)
-            .attr('class', 'dept-path').attr('d', iPath).attr('fill', fill);
+        svgSel.append('path')
+            .datum(f).attr('class', 'dept-path').attr('d', iPath).attr('fill', fill);
 
         if (!isNaN(c[0]) && !isNaN(c[1])) {
             const tc = fill === FILL_NONE ? '#374151' : '#fff';
@@ -275,18 +414,24 @@ function renderMap(geo) {
                 .attr('x', c[0]).attr('y', c[1])
                 .attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
                 .attr('font-size', '8px').attr('font-weight', '700')
-                .attr('fill', tc).attr('pointer-events', 'none').text(code);
+                .attr('fill', tc).attr('pointer-events', 'none')
+                .text(code);
         }
     });
 }
 
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+// ═══════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════
 loadMap();
 generateQR();
 
-var rz;
-window.addEventListener('resize', function() {
+let rz;
+window.addEventListener('resize', () => {
     clearTimeout(rz);
-    rz = setTimeout(function() { loadMap(); }, 180);
+    rz = setTimeout(() => loadMap(), 180);
 });
 </script>
 </body>
